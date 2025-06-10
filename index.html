@@ -37,6 +37,8 @@
         <option value="tpo@nimsuniversity.org">Training and Placement Officer</option>
         <option value="directorniet@nimsuniversity.org">Director, NIET</option>
         <option value="vineet.mehan@nimsuniversity.org">HOD, Engineering Dept.</option>
+        <option value="registrar@nimsuniversity.org">Registrar</option>
+        <option value="all">All Recipients</option>
       </select>
     </label>
     <button type="submit">Compose Email</button>
@@ -79,7 +81,19 @@ ${phone}
 ${email}
 `);
 
-      const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+      let mailtoLink;
+      if (recipientEmail === 'all') {
+        const allRecipients = [
+          'coe@nimsuniversity.org',
+          'tpo@nimsuniversity.org',
+          'directorniet@nimsuniversity.org',
+          'vineet.mehan@nimsuniversity.org',
+          'registrar@nimsuniversity.org'
+        ].join(',');
+        mailtoLink = `mailto:${allRecipients}?subject=${subject}&body=${body}`;
+      } else {
+        mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+      }
       window.location.href = mailtoLink;
     });
   </script>
