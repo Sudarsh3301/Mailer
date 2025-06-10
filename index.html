@@ -5,84 +5,422 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Email Request Form</title>
 <style>
-  body { font-family: Arial, sans-serif; padding: 2rem; }
-  form { max-width: 500px; margin: auto; }
-  label { display: block; margin-top: 1rem; }
-  input, select { width: 100%; padding: 0.5rem; margin-top: 0.5rem; }
-  button { margin-top: 1rem; padding: 0.7rem 1.5rem; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  .container {
+    max-width: 650px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .header {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .header p {
+    opacity: 0.9;
+    font-size: 0.9rem;
+  }
+  
+  form { 
+    padding: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label { 
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9rem;
+  }
+  
+  input, select, textarea { 
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+  
+  select {
+    cursor: pointer;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+  
+  .btn-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  button { 
+    flex: 1;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+  }
+  
+  .btn-secondary {
+    background: #ecf0f1;
+    color: #2c3e50;
+  }
+  
+  .btn-secondary:hover {
+    background: #d5dbdb;
+  }
+  
+  .preview-container {
+    display: none;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #3498db;
+  }
+  
+  .preview-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .email-preview {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e6ed;
+  }
+  
+  .randomization-info {
+    background: #e3f2fd;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    color: #1565c0;
+  }
+  
+  .randomization-info strong {
+    color: #0d47a1;
+  }
 </style>
 </head>
 <body>
-  <h1>Email Request Form</h1>
-  <form id="emailForm">
-    <label>Name:
-      <input type="text" name="name" required>
-    </label>
-    <label>Course and Branch:
-      <input type="text" name="course" placeholder="B.Tech (CSE)" required>
-    </label>
-    <label>Enrollment Number:
-      <input type="text" name="enrollment" required>
-    </label>
-    <label>Phone Number:
-      <input type="text" name="phone" required>
-    </label>
-    <label>Your Email Address:
-      <input type="email" name="email" required>
-    </label>
-    <label>Recipient:
-      <select name="recipient" required>
-        <option value="">-- Select --</option>
-        <option value="coe@nimsuniversity.org">Controller of Examinations</option>
-        <option value="tpo@nimsuniversity.org">Training and Placement Officer</option>
-        <option value="directorniet@nimsuniversity.org">Director, NIET</option>
-        <option value="vineet.mehan@nimsuniversity.org">HOD, Engineering Dept.</option>
-        <option value="registrar@nimsuniversity.org">Registrar</option>
-        <option value="all">All Recipients</option>
-      </select>
-    </label>
-    <button type="submit">Compose Email</button>
-  </form>
+  <div class="container">
+    <div class="header">
+      <h1>🎓 Email Request Form</h1>
+      <p>Dynamic template generator for NIMS University students</p>
+    </div>
+    
+    <form id="emailForm">
+      <div class="randomization-info">
+        <strong>🔄 Smart Template System:</strong> Each email is automatically customized with unique phrasing and structure to prevent identical submissions while maintaining professionalism.
+      </div>
+      
+      <div class="form-group">
+        <label>Full Name:</label>
+        <input type="text" name="name" placeholder="Enter your full name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Course and Branch:</label>
+        <input type="text" name="course" placeholder="e.g., B.Tech (CSE), B.Tech (AI/ML)" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Enrollment Number:</label>
+        <input type="text" name="enrollment" placeholder="Your enrollment number" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" placeholder="Your contact number" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Your Email Address:</label>
+        <input type="email" name="email" placeholder="your.email@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Recipient:</label>
+        <select name="recipient" required>
+          <option value="">-- Select Recipient --</option>
+          <option value="coe@nimsuniversity.org">Controller of Examinations</option>
+          <option value="tpo@nimsuniversity.org">Training and Placement Officer</option>
+          <option value="directorniet@nimsuniversity.org">Director, NIET</option>
+          <option value="vineet.mehan@nimsuniversity.org">HOD, Engineering Dept.</option>
+          <option value="registrar@nimsuniversity.org">Registrar</option>
+          <option value="all">All Recipients</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Additional Context (Optional):</label>
+        <textarea name="additional" placeholder="Any specific details you'd like to mention (placement offers, specific deadlines, etc.)"></textarea>
+      </div>
+      
+      <div class="btn-container">
+        <button type="button" id="previewBtn" class="btn-secondary">📋 Preview Email</button>
+        <button type="submit" class="btn-primary">📧 Compose & Send</button>
+      </div>
+    </form>
+    
+    <div id="previewContainer" class="preview-container">
+      <div class="preview-title">Email Preview:</div>
+      <div id="emailPreview" class="email-preview"></div>
+    </div>
+  </div>
 
   <script>
+    // Dynamic email templates with variations
+    const emailTemplates = {
+      subjects: [
+        'Request for Early Conduct of Examinations for Debarred 7th Semester Students',
+        'Urgent Appeal for 7th Semester Examination Schedule for Debarred Students',
+        'Request to Schedule Pending 7th Semester Examinations',
+        'Appeal for Immediate Conduct of 7th Semester Exams - Debarred Students'
+      ],
+      
+      openings: [
+        'I hope this email finds you well.',
+        'I hope this message finds you in good health.',
+        'I trust you are doing well.',
+        'I hope you are having a productive day.'
+      ],
+      
+      introductions: [
+        'I am writing to respectfully bring to your attention',
+        'I am reaching out to humbly request your consideration regarding',
+        'I would like to respectfully highlight',
+        'I am writing to seek your kind support concerning'
+      ],
+      
+      situations: [
+        'the challenging situation faced by students who were debarred from the 7th semester examinations',
+        'the difficulties encountered by those of us who missed the 7th semester examinations due to debarment',
+        'the predicament of students who were unable to appear for 7th semester exams due to debarment',
+        'the circumstances affecting students debarred from participating in 7th semester examinations'
+      ],
+      
+      impacts: [
+        'This situation has created significant obstacles in our academic and professional advancement.',
+        'The absence of these results has become a major barrier to our career progression.',
+        'This has resulted in considerable challenges for our future academic and professional pursuits.',
+        'The lack of 7th semester results is severely impacting our ability to move forward academically and professionally.'
+      ],
+      
+      consequences: [
+        'complete our degree documentation requirements',
+        'finalize the necessary academic credentials',
+        'obtain the required degree completion certificates',
+        'secure final academic documentation'
+      ],
+      
+      requests: [
+        'I humbly request that the University kindly consider conducting the pending 7th semester examinations',
+        'I respectfully appeal for the University to schedule the outstanding 7th semester examinations',
+        'I earnestly request the University to arrange for the conduct of 7th semester examinations',
+        'I would be grateful if the University could facilitate the completion of 7th semester examinations'
+      ],
+      
+      closings: [
+        'Thank you very much for your understanding and support.',
+        'I deeply appreciate your time and consideration in this matter.',
+        'Thank you for your kind attention to this urgent matter.',
+        'I am grateful for your understanding and any assistance you can provide.'
+      ],
+      
+      signOffs: [
+        'Yours sincerely,',
+        'With warm regards,',
+        'Respectfully yours,',
+        'Kind regards,'
+      ]
+    };
+    
+    // Recipient-specific customizations
+    const recipientCustomizations = {
+      'coe@nimsuniversity.org': {
+        title: 'Controller of Examinations',
+        focus: 'examination scheduling and academic compliance',
+        specific: 'As the Controller of Examinations, your guidance in resolving this matter would be invaluable.'
+      },
+      'tpo@nimsuniversity.org': {
+        title: 'Training and Placement Officer',
+        focus: 'career placement and employment opportunities',
+        specific: 'This situation is particularly affecting our ability to secure placements and career opportunities.'
+      },
+      'directorniet@nimsuniversity.org': {
+        title: 'Director, NIET',
+        focus: 'overall academic welfare and institutional support',
+        specific: 'Your leadership and support in addressing this academic challenge would be greatly appreciated.'
+      },
+      'vineet.mehan@nimsuniversity.org': {
+        title: 'HOD, Engineering Department',
+        focus: 'departmental academic progress and student welfare',
+        specific: 'As our departmental head, your support in facilitating this resolution would mean a great deal to us.'
+      },
+      'registrar@nimsuniversity.org': {
+        title: 'Registrar',
+        focus: 'academic records and degree completion processes',
+        specific: 'Your assistance in expediting this process would help us complete our academic journey successfully.'
+      }
+    };
+    
+    function getRandomElement(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+    
+    function generateDynamicEmail(formData) {
+      const recipient = recipientCustomizations[formData.recipient] || 
+                       { title: 'Sir/Madam', focus: 'academic matters', specific: '' };
+      
+      const subject = getRandomElement(emailTemplates.subjects);
+      const opening = getRandomElement(emailTemplates.openings);
+      const introduction = getRandomElement(emailTemplates.introductions);
+      const situation = getRandomElement(emailTemplates.situations);
+      const impact = getRandomElement(emailTemplates.impacts);
+      const consequence = getRandomElement(emailTemplates.consequences);
+      const request = getRandomElement(emailTemplates.requests);
+      const closing = getRandomElement(emailTemplates.closings);
+      const signOff = getRandomElement(emailTemplates.signOffs);
+      
+      // Additional context integration
+      const additionalContext = formData.additional ? 
+        `\n\nAdditionally, ${formData.additional}` : '';
+      
+      const body = `Dear ${recipient.title},
+
+${opening}
+
+${introduction} ${situation} at NIMS University. As the 8th semester has now concluded, ${impact}
+
+Without the 7th semester results, we are unable to:
+- ${consequence} required by potential employers
+- proceed with placement offers received through campus recruitment
+- apply for higher education opportunities
+- move forward with our professional careers
+
+${recipient.specific}${additionalContext}
+
+${request} for debarred students at the earliest possible opportunity. This would enable us to fulfill our academic requirements and progress with our career goals.
+
+${closing}
+
+${signOff}
+${formData.name}
+${formData.course}, Final Year
+Enrollment No.: ${formData.enrollment}
+Contact: ${formData.phone}
+Email: ${formData.email}`;
+
+      return { subject, body };
+    }
+    
+    function previewEmail() {
+      const formData = getFormData();
+      if (!formData.name || !formData.recipient) {
+        alert('Please fill in at least your name and select a recipient to preview.');
+        return;
+      }
+      
+      const email = generateDynamicEmail(formData);
+      const preview = `Subject: ${email.subject}\n\n${email.body}`;
+      
+      document.getElementById('emailPreview').textContent = preview;
+      document.getElementById('previewContainer').style.display = 'block';
+      document.getElementById('previewContainer').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function getFormData() {
+      const form = document.getElementById('emailForm');
+      return {
+        name: form.name.value,
+        course: form.course.value,
+        enrollment: form.enrollment.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        recipient: form.recipient.value,
+        additional: form.additional.value
+      };
+    }
+    
+    // Event listeners
+    document.getElementById('previewBtn').addEventListener('click', previewEmail);
+    
     document.getElementById('emailForm').addEventListener('submit', function(event) {
       event.preventDefault();
-
-      const form = event.target;
-      const name = form.name.value;
-      const course = form.course.value;
-      const enrollment = form.enrollment.value;
-      const phone = form.phone.value;
-      const email = form.email.value;
-      const recipientEmail = form.recipient.value;
-
-      const subject = encodeURIComponent('Request for Early Conduct of Examinations for Debarred 7th Semester Students');
-
-      const body = encodeURIComponent(`Dear Sir/Madam,
-
-I hope this email finds you well.
-
-I am ${name}, a final-year student (Enrollment No.: ${enrollment}) of ${course} at NIMS University.
-I was debarred from the 7th semester examinations, and now that the 8th semester is complete, the absence of my 7th semester results is a major barrier to my academic and professional progress.
-
-Without these results, I cannot:
-- finalize my degree documentation required by recruiters or higher studies,
-- proceed with placement offers received from on campus placement drives,
-- apply for jobs or further education.
-
-I humbly request that the University kindly consider conducting the pending 7th semester examinations for debarred students at the earliest possible opportunity, enabling us to fulfill our academic requirements and move forward with our careers.
-
-Thank you very much for your understanding and support.
-
-Yours sincerely,
-${name}
-B.Tech (${course}), Final Year (Enrollment No.: ${enrollment})
-${phone}
-${email}
-`);
-
+      
+      const formData = getFormData();
+      const email = generateDynamicEmail(formData);
+      
+      const subject = encodeURIComponent(email.subject);
+      const body = encodeURIComponent(email.body);
+      
       let mailtoLink;
-      if (recipientEmail === 'all') {
+      if (formData.recipient === 'all') {
         const allRecipients = [
           'coe@nimsuniversity.org',
           'tpo@nimsuniversity.org',
@@ -92,9 +430,17 @@ ${email}
         ].join(',');
         mailtoLink = `mailto:${allRecipients}?subject=${subject}&body=${body}`;
       } else {
-        mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+        mailtoLink = `mailto:${formData.recipient}?subject=${subject}&body=${body}`;
       }
+      
       window.location.href = mailtoLink;
+    });
+    
+    // Auto-preview on recipient change
+    document.querySelector('select[name="recipient"]').addEventListener('change', function() {
+      if (this.value && document.querySelector('input[name="name"]').value) {
+        setTimeout(previewEmail, 100);
+      }
     });
   </script>
 </body>
