@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Request Form</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 2rem; }
+  form { max-width: 500px; margin: auto; }
+  label { display: block; margin-top: 1rem; }
+  input, select { width: 100%; padding: 0.5rem; margin-top: 0.5rem; }
+  button { margin-top: 1rem; padding: 0.7rem 1.5rem; }
+</style>
+</head>
+<body>
+  <h1>Email Request Form</h1>
+  <form id="emailForm">
+    <label>Name:
+      <input type="text" name="name" required>
+    </label>
+    <label>Course and Branch:
+      <input type="text" name="course" placeholder="B.Tech (CSE)" required>
+    </label>
+    <label>Enrollment Number:
+      <input type="text" name="enrollment" required>
+    </label>
+    <label>Phone Number:
+      <input type="text" name="phone" required>
+    </label>
+    <label>Your Email Address:
+      <input type="email" name="email" required>
+    </label>
+    <label>Recipient:
+      <select name="recipient" required>
+        <option value="">-- Select --</option>
+        <option value="coe@nimsuniversity.org">Controller of Examinations</option>
+        <option value="tpo@nimsuniversity.org">Training and Placement Officer</option>
+        <option value="directorniet@nimsuniversity.org">Director, NIET</option>
+        <option value="vineet.mehan@nimsuniversity.org">HOD, Engineering Dept.</option>
+      </select>
+    </label>
+    <button type="submit">Compose Email</button>
+  </form>
+
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const name = form.name.value;
+      const course = form.course.value;
+      const enrollment = form.enrollment.value;
+      const phone = form.phone.value;
+      const email = form.email.value;
+      const recipientEmail = form.recipient.value;
+
+      const subject = encodeURIComponent('Request for Early Conduct of Examinations for Debarred 7th Semester Students');
+
+      const body = encodeURIComponent(`Dear Sir/Madam,
+
+I hope this email finds you well.
+
+I am ${name}, a final-year student (Enrollment No.: ${enrollment}) of ${course} at NIMS University.
+I was debarred from the 7th semester examinations, and now that the 8th semester is complete, the absence of my 7th semester results is a major barrier to my academic and professional progress.
+
+Without these results, I cannot:
+- finalize my degree documentation required by recruiters or higher studies,
+- proceed with placement offers received from on campus placement drives,
+- apply for jobs or further education.
+
+I humbly request that the University kindly consider conducting the pending 7th semester examinations for debarred students at the earliest possible opportunity, enabling us to fulfill our academic requirements and move forward with our careers.
+
+Thank you very much for your understanding and support.
+
+Yours sincerely,
+${name}
+B.Tech (${course}), Final Year (Enrollment No.: ${enrollment})
+${phone}
+${email}
+`);
+
+      const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+      window.location.href = mailtoLink;
+    });
+  </script>
+</body>
+</html>
