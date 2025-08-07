@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Email Request Form</title>
+<title>Marksheet Request Form - NIMS University</title>
 <style>
   * {
     box-sizing: border-box;
@@ -19,7 +19,7 @@
   }
   
   .container {
-    max-width: 650px;
+    max-width: 700px;
     margin: auto;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -29,7 +29,7 @@
   }
   
   .header {
-    background: linear-gradient(135deg, #2c3e50, #3498db);
+    background: linear-gradient(135deg, #2c3e50, #e74c3c);
     color: white;
     padding: 2rem;
     text-align: center;
@@ -73,9 +73,9 @@
   
   input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #e74c3c;
     background: white;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
   }
   
   select {
@@ -84,8 +84,43 @@
   
   textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 100px;
     font-family: inherit;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+  }
+  
+  .urgency-selector {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .urgency-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .urgency-item input[type="radio"] {
+    width: auto;
+    margin: 0;
   }
   
   .btn-container {
@@ -106,13 +141,13 @@
   }
   
   .btn-primary {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
     color: white;
   }
   
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
   }
   
   .btn-secondary {
@@ -130,7 +165,7 @@
     padding: 1.5rem;
     background: #f8f9fa;
     border-radius: 10px;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #e74c3c;
   }
   
   .preview-title {
@@ -152,30 +187,31 @@
     border: 1px solid #e0e6ed;
   }
   
-  .randomization-info {
-    background: #e3f2fd;
+  .info-box {
+    background: #fff3cd;
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 1.5rem;
     font-size: 0.85rem;
-    color: #1565c0;
+    color: #856404;
+    border: 1px solid #ffeaa7;
   }
   
-  .randomization-info strong {
-    color: #0d47a1;
+  .info-box strong {
+    color: #6c5500;
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>🎓 Email Request Form</h1>
-      <p>Dynamic template generator for NIMS University students</p>
+      <h1>📋 Marksheet Request Form</h1>
+      <p>Dynamic template generator for marksheet delay issues</p>
     </div>
     
     <form id="emailForm">
-      <div class="randomization-info">
-        <strong>🔄 Smart Template System:</strong> Each email is automatically customized with unique phrasing and structure to prevent identical submissions while maintaining professionalism.
+      <div class="info-box">
+        <strong>🔄 Smart Template System:</strong> Each email is automatically customized with unique phrasing based on your specific situation and urgency level to prevent duplicate submissions.
       </div>
       
       <div class="form-group">
@@ -185,12 +221,17 @@
       
       <div class="form-group">
         <label>Course and Branch:</label>
-        <input type="text" name="course" placeholder="e.g., B.Tech (CSE), B.Tech (AI/ML)" required>
+        <input type="text" name="course" placeholder="e.g., B.Tech CSE, B.Tech AI/ML" required>
       </div>
       
       <div class="form-group">
-        <label>Enrollment Number:</label>
-        <input type="text" name="enrollment" placeholder="Your enrollment number" required>
+        <label>Roll Number / Enrollment Number:</label>
+        <input type="text" name="rollNumber" placeholder="Your roll/enrollment number" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Batch Year:</label>
+        <input type="text" name="batch" placeholder="e.g., 2021-2025" required>
       </div>
       
       <div class="form-group">
@@ -201,6 +242,42 @@
       <div class="form-group">
         <label>Your Email Address:</label>
         <input type="email" name="email" placeholder="your.email@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Documents Needed:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="finalMarksheet" name="documents" value="final">
+            <label for="finalMarksheet">Final Marksheet</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="consolidatedMarksheet" name="documents" value="consolidated">
+            <label for="consolidatedMarksheet">Consolidated Marksheet</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="semesterResults" name="documents" value="semester">
+            <label for="semesterResults">7th Semester Results (Debarred)</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Urgency Level:</label>
+        <div class="urgency-selector">
+          <div class="urgency-item">
+            <input type="radio" id="standard" name="urgency" value="standard" checked>
+            <label for="standard">Standard Request</label>
+          </div>
+          <div class="urgency-item">
+            <input type="radio" id="urgent" name="urgency" value="urgent">
+            <label for="urgent">Urgent (Job/Admission)</label>
+          </div>
+          <div class="urgency-item">
+            <input type="radio" id="critical" name="urgency" value="critical">
+            <label for="critical">Critical (Deadline Soon)</label>
+          </div>
+        </div>
       </div>
       
       <div class="form-group">
@@ -217,8 +294,8 @@
       </div>
       
       <div class="form-group">
-        <label>Additional Context (Optional):</label>
-        <textarea name="additional" placeholder="Any specific details you'd like to mention (placement offers, specific deadlines, etc.)"></textarea>
+        <label>Specific Context (Optional):</label>
+        <textarea name="context" placeholder="e.g., Job offer deadline, admission application deadline, specific company requirements, etc."></textarea>
       </div>
       
       <div class="btn-container">
@@ -234,69 +311,96 @@
   </div>
 
   <script>
-    // Dynamic email templates with variations
-    const emailTemplates = {
-      subjects: [
-        'Request for Early Conduct of Examinations for Debarred 7th Semester Students',
-        'Urgent Appeal for 7th Semester Examination Schedule for Debarred Students',
-        'Request to Schedule Pending 7th Semester Examinations',
-        'Appeal for Immediate Conduct of 7th Semester Exams - Debarred Students'
-      ],
+    // Dynamic email templates for marksheet requests
+    const marksheetTemplates = {
+      subjects: {
+        standard: [
+          'Request for Marksheet Release Timeline – {course} Batch {batch}',
+          'Inquiry Regarding Marksheet Availability – {course} {batch}',
+          'Request for Academic Document Release – {course} Batch {batch}',
+          'Marksheet Issuance Status Inquiry – {course} Final Year'
+        ],
+        urgent: [
+          'Urgent Request for Marksheet Release Timeline – {course} Batch {batch}',
+          'Urgent: Marksheet Required for Employment/Admission – {course} {batch}',
+          'Time-Sensitive Request for Academic Documents – {course} Batch {batch}',
+          'Urgent Marksheet Requirement – {course} Final Year Students'
+        ],
+        critical: [
+          'Critical: Immediate Marksheet Required – {course} Batch {batch}',
+          'Extremely Urgent: Marksheet Needed for Deadline – {course} {batch}',
+          'Critical Request: Academic Documents for Immediate Processing',
+          'Emergency Request for Marksheet Release – {course} Batch {batch}'
+        ]
+      },
       
       openings: [
-        'I hope this email finds you well.',
-        'I hope this message finds you in good health.',
-        'I trust you are doing well.',
+        'I hope this message finds you well.',
+        'I hope you are doing well.',
+        'I trust this email finds you in good health.',
         'I hope you are having a productive day.'
       ],
       
       introductions: [
-        'I am writing to respectfully bring to your attention',
-        'I am reaching out to humbly request your consideration regarding',
-        'I would like to respectfully highlight',
-        'I am writing to seek your kind support concerning'
+        'I am writing to respectfully inquire about',
+        'I am reaching out to request information regarding',
+        'I would like to seek clarification on',
+        'I am writing to request your assistance concerning'
       ],
       
-      situations: [
-        'the challenging situation faced by students who were debarred from the 7th semester examinations',
-        'the difficulties encountered by those of us who missed the 7th semester examinations due to debarment',
-        'the predicament of students who were unable to appear for 7th semester exams due to debarment',
-        'the circumstances affecting students debarred from participating in 7th semester examinations'
-      ],
+      urgencyContexts: {
+        standard: [
+          'As we are in the process of applying for various opportunities,',
+          'Since many students are preparing for their next academic or professional steps,',
+          'As final year students preparing for career transitions,',
+          'Given that we are approaching graduation and future planning,'
+        ],
+        urgent: [
+          'As several students have urgent job applications and admission deadlines,',
+          'Due to immediate requirements for employment verification and admissions,',
+          'Given the time-sensitive nature of job offers and university applications,',
+          'As we face pressing deadlines for various career opportunities,'
+        ],
+        critical: [
+          'Due to extremely urgent deadlines for job joining and admissions,',
+          'Given critical timelines that cannot be extended,',
+          'As we face immediate deadlines that may affect our career prospects,',
+          'Due to non-negotiable deadlines from employers and educational institutions,'
+        ]
+      },
+      
+      documentRequests: {
+        final: 'final year marksheets',
+        consolidated: 'consolidated academic records',
+        semester: '7th semester results and marksheets for previously debarred students'
+      },
       
       impacts: [
-        'This situation has created significant obstacles in our academic and professional advancement.',
-        'The absence of these results has become a major barrier to our career progression.',
-        'This has resulted in considerable challenges for our future academic and professional pursuits.',
-        'The lack of 7th semester results is severely impacting our ability to move forward academically and professionally.'
-      ],
-      
-      consequences: [
-        'complete our degree documentation requirements',
-        'finalize the necessary academic credentials',
-        'obtain the required degree completion certificates',
-        'secure final academic documentation'
+        'the unavailability of these documents is creating significant challenges',
+        'the delay in documentation is causing considerable difficulties',
+        'this documentation gap is impacting our ability to proceed',
+        'the absence of these records is hindering our progress'
       ],
       
       requests: [
-        'I humbly request that the University kindly consider conducting the pending 7th semester examinations',
-        'I respectfully appeal for the University to schedule the outstanding 7th semester examinations',
-        'I earnestly request the University to arrange for the conduct of 7th semester examinations',
-        'I would be grateful if the University could facilitate the completion of 7th semester examinations'
+        'We would be sincerely grateful if you could provide clarity on',
+        'We humbly request information regarding',
+        'We respectfully seek guidance about',
+        'We would appreciate your assistance in clarifying'
+      ],
+      
+      timelineRequests: [
+        'the expected release timeline for the required documents',
+        'when we might expect these documents to be available',
+        'the current status and expected completion date',
+        'any tentative schedule for document release'
       ],
       
       closings: [
-        'Thank you very much for your understanding and support.',
-        'I deeply appreciate your time and consideration in this matter.',
-        'Thank you for your kind attention to this urgent matter.',
-        'I am grateful for your understanding and any assistance you can provide.'
-      ],
-      
-      signOffs: [
-        'Yours sincerely,',
-        'With warm regards,',
-        'Respectfully yours,',
-        'Kind regards,'
+        'Thank you for your time and understanding. We look forward to your guidance.',
+        'We appreciate your consideration of this matter and await your response.',
+        'Thank you for your support in resolving this important matter.',
+        'We are grateful for your attention to this request and look forward to hearing from you.'
       ]
     };
     
@@ -304,28 +408,33 @@
     const recipientCustomizations = {
       'coe@nimsuniversity.org': {
         title: 'Controller of Examinations',
-        focus: 'examination scheduling and academic compliance',
-        specific: 'As the Controller of Examinations, your guidance in resolving this matter would be invaluable.'
+        focus: 'examination records and marksheet processing',
+        specific: 'As the Controller of Examinations, your office handles the official release of academic records.',
+        approach: 'We understand the importance of accuracy in academic documentation and appreciate your diligent processes.'
       },
       'tpo@nimsuniversity.org': {
         title: 'Training and Placement Officer',
-        focus: 'career placement and employment opportunities',
-        specific: 'This situation is particularly affecting our ability to secure placements and career opportunities.'
+        focus: 'employment opportunities and placement processes',
+        specific: 'Many students are facing challenges with job applications due to documentation requirements.',
+        approach: 'Your assistance in coordinating with the examination cell would greatly help students secure employment.'
       },
       'directorniet@nimsuniversity.org': {
         title: 'Director, NIET',
-        focus: 'overall academic welfare and institutional support',
-        specific: 'Your leadership and support in addressing this academic challenge would be greatly appreciated.'
+        focus: 'overall student welfare and institutional coordination',
+        specific: 'Your leadership has always been instrumental in addressing student concerns.',
+        approach: 'We request your kind intervention to expedite the documentation process.'
       },
       'vineet.mehan@nimsuniversity.org': {
         title: 'HOD, Engineering Department',
-        focus: 'departmental academic progress and student welfare',
-        specific: 'As our departmental head, your support in facilitating this resolution would mean a great deal to us.'
+        focus: 'departmental student support and academic coordination',
+        specific: 'Your mentorship has always been a pillar of support for our department students.',
+        approach: 'We hope to resolve this matter under your guidance and support.'
       },
       'registrar@nimsuniversity.org': {
         title: 'Registrar',
-        focus: 'academic records and degree completion processes',
-        specific: 'Your assistance in expediting this process would help us complete our academic journey successfully.'
+        focus: 'academic record management and degree processes',
+        specific: 'Your office oversees the official academic record management.',
+        approach: 'We seek your assistance in expediting the release of required documentation.'
       }
     };
     
@@ -333,46 +442,75 @@
       return array[Math.floor(Math.random() * array.length)];
     }
     
+    function getFormData() {
+      const form = document.getElementById('emailForm');
+      const documents = Array.from(form.querySelectorAll('input[name="documents"]:checked'))
+                           .map(cb => cb.value);
+      
+      return {
+        name: form.name.value,
+        course: form.course.value,
+        rollNumber: form.rollNumber.value,
+        batch: form.batch.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        documents: documents,
+        urgency: form.urgency.value,
+        recipient: form.recipient.value,
+        context: form.context.value
+      };
+    }
+    
     function generateDynamicEmail(formData) {
       const recipient = recipientCustomizations[formData.recipient] || 
-                       { title: 'Sir/Madam', focus: 'academic matters', specific: '' };
+                       { title: 'Sir/Madam', focus: 'academic matters', specific: '', approach: '' };
       
-      const subject = getRandomElement(emailTemplates.subjects);
-      const opening = getRandomElement(emailTemplates.openings);
-      const introduction = getRandomElement(emailTemplates.introductions);
-      const situation = getRandomElement(emailTemplates.situations);
-      const impact = getRandomElement(emailTemplates.impacts);
-      const consequence = getRandomElement(emailTemplates.consequences);
-      const request = getRandomElement(emailTemplates.requests);
-      const closing = getRandomElement(emailTemplates.closings);
-      const signOff = getRandomElement(emailTemplates.signOffs);
+      const urgency = formData.urgency;
+      const subject = getRandomElement(marksheetTemplates.subjects[urgency])
+                        .replace('{course}', formData.course)
+                        .replace('{batch}', formData.batch);
       
-      // Additional context integration
-      const additionalContext = formData.additional ? 
-        `\n\nAdditionally, ${formData.additional}` : '';
+      const opening = getRandomElement(marksheetTemplates.openings);
+      const introduction = getRandomElement(marksheetTemplates.introductions);
+      const urgencyContext = getRandomElement(marksheetTemplates.urgencyContexts[urgency]);
+      const impact = getRandomElement(marksheetTemplates.impacts);
+      const request = getRandomElement(marksheetTemplates.requests);
+      const timelineRequest = getRandomElement(marksheetTemplates.timelineRequests);
+      const closing = getRandomElement(marksheetTemplates.closings);
+      
+      // Build document list
+      const documentList = formData.documents.map(doc => 
+        `- ${marksheetTemplates.documentRequests[doc] || doc}`
+      ).join('\n');
+      
+      // Additional context
+      const additionalContext = formData.context ? 
+        `\n\nSpecific Context: ${formData.context}` : '';
       
       const body = `Dear ${recipient.title},
 
 ${opening}
 
-${introduction} ${situation} at NIMS University. As the 8th semester has now concluded, ${impact}
+${introduction} the release of marksheets for ${formData.course} students, Batch ${formData.batch}.
 
-Without the 7th semester results, we are unable to:
-- ${consequence} required by potential employers
-- proceed with placement offers received through campus recruitment
-- apply for higher education opportunities
-- move forward with our professional careers
+${urgencyContext} ${impact} in our academic and professional advancement.
 
-${recipient.specific}${additionalContext}
+We are specifically seeking:
+${documentList}
 
-${request} for debarred students at the earliest possible opportunity. This would enable us to fulfill our academic requirements and progress with our career goals.
+${recipient.specific} ${recipient.approach}
+
+${request}:
+1. ${timelineRequest}
+2. The current processing status of these documents
+3. Any steps we can take to expedite the process${additionalContext}
 
 ${closing}
 
-${signOff}
+Yours respectfully,
 ${formData.name}
-${formData.course}, Final Year
-Enrollment No.: ${formData.enrollment}
+${formData.course}, Batch ${formData.batch}
+Roll Number: ${formData.rollNumber}
 Contact: ${formData.phone}
 Email: ${formData.email}`;
 
@@ -381,8 +519,8 @@ Email: ${formData.email}`;
     
     function previewEmail() {
       const formData = getFormData();
-      if (!formData.name || !formData.recipient) {
-        alert('Please fill in at least your name and select a recipient to preview.');
+      if (!formData.name || !formData.recipient || formData.documents.length === 0) {
+        alert('Please fill in your name, select a recipient, and choose at least one document type to preview.');
         return;
       }
       
@@ -394,19 +532,6 @@ Email: ${formData.email}`;
       document.getElementById('previewContainer').scrollIntoView({ behavior: 'smooth' });
     }
     
-    function getFormData() {
-      const form = document.getElementById('emailForm');
-      return {
-        name: form.name.value,
-        course: form.course.value,
-        enrollment: form.enrollment.value,
-        phone: form.phone.value,
-        email: form.email.value,
-        recipient: form.recipient.value,
-        additional: form.additional.value
-      };
-    }
-    
     // Event listeners
     document.getElementById('previewBtn').addEventListener('click', previewEmail);
     
@@ -414,6 +539,11 @@ Email: ${formData.email}`;
       event.preventDefault();
       
       const formData = getFormData();
+      if (formData.documents.length === 0) {
+        alert('Please select at least one document type.');
+        return;
+      }
+      
       const email = generateDynamicEmail(formData);
       
       const subject = encodeURIComponent(email.subject);
@@ -436,11 +566,27 @@ Email: ${formData.email}`;
       window.location.href = mailtoLink;
     });
     
-    // Auto-preview on recipient change
-    document.querySelector('select[name="recipient"]').addEventListener('change', function() {
-      if (this.value && document.querySelector('input[name="name"]').value) {
-        setTimeout(previewEmail, 100);
-      }
+    // Auto-preview on key changes
+    ['recipient', 'urgency'].forEach(fieldName => {
+      document.querySelector(`[name="${fieldName}"]`).addEventListener('change', function() {
+        const nameField = document.querySelector('input[name="name"]');
+        const documentsChecked = document.querySelectorAll('input[name="documents"]:checked');
+        if (nameField.value && this.value && documentsChecked.length > 0) {
+          setTimeout(previewEmail, 100);
+        }
+      });
+    });
+    
+    // Auto-preview on document selection change
+    document.querySelectorAll('input[name="documents"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const nameField = document.querySelector('input[name="name"]');
+        const recipientField = document.querySelector('[name="recipient"]');
+        const documentsChecked = document.querySelectorAll('input[name="documents"]:checked');
+        if (nameField.value && recipientField.value && documentsChecked.length > 0) {
+          setTimeout(previewEmail, 100);
+        }
+      });
     });
   </script>
 </body>
